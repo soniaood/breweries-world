@@ -5,7 +5,7 @@ This project allows an end user to search and retrieve information about breweri
 1. Clone this repository
 2. Make sure you are using `JDK 11` and Maven `3.+`
 3. You can build the project and run the tests by running `mvn clean install`
-4. Once successfully built, you can run the service using java -jar command:
+4. Once successfully built, you can run the service using command:
 ```
    mvn clean spring-boot:run -f api
 ```
