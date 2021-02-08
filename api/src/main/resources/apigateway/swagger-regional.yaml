@@ -1,0 +1,123 @@
+---
+swagger: '2.0'
+info:
+  description: Breweries World Service
+  title: Breweries World
+  version: '1.0'
+host: localhost:8080
+basePath: '/'
+tags:
+  - name: 'breweries-world-controller'
+    description: 'Brewery Search Controller'
+paths:
+  '/breweries':
+    get:
+      tags:
+        - breweries-world-controller
+      summary: Retrieves list of breweries available on Open Breweries DB.
+      operationId: getBreweries
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Brewery'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+  '/breweries/{breweryId}':
+    get:
+      tags:
+        - breweries-world-controller
+      summary: Retrieves a brewery for the brewery identified in the request header.
+      operationId: getBrewery
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - '*/*'
+      parameters:
+        - in: path
+          name: breweryId
+          description: Brewery identifier
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Brewery'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BadRequest'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
+definitions:
+  BadRequest:
+    type: array
+    items:
+      $ref: '#/definitions/BadRequestDetail'
+  BadRequestDetail:
+    type: object
+    properties:
+      field:
+        type: string
+      message:
+        type: string
+  Brewery:
+    type: object
+    description: Details of a brewery fetched from Open Brewery DB.
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: Unique identifier for the Brewery resource on Open Brewery DB.
+        example: 163
+      name:
+        type: string
+        description: Name of the Brewery.
+        example: "Mudshark Brewing Co"
+      breweryType:
+        type: string
+      street:
+        type: string
+      address2:
+        type: string
+      address3:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      countyProvince:
+        type: string
+      country:
+        type: string
+      postalCode:
+        type: string
+      longitude:
+        type: string
+      latitude:
+        type: string
+      phone:
+        type: string
+      websiteUrl:
+        type: string
+      updatedAt:
+        type: string
+      createdAt:
+        type: string
